@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties url="src/main/resources/jdbc.properties"></properties>
+    <classPathEntry location="F:\JAVAJAR\mysql-connector-java-8.0.25\mysql-connector-java-8.0.25.jar"/>
+    <context id="DB2Tables" targetRuntime="Mybatis3">
+
+        <jdbcConnection driverClass="${jdbc.dirver}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.username}"></jdbcConnection>
+
+        <javaModelGenerator targetPackage="org.seckill.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="org.seckill.dao"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        <table tableName="seckill" enableUpdateByExample="false" enableSelectByExample="false"
+        enableDeleteByExample="false" enableCountByExample="false" ></table>
+        <table tableName="successKilled"  enableUpdateByExample="false" enableSelectByExample="false"
+               enableDeleteByExample="false" enableCountByExample="false" ></table>
+    </context>
+</generatorConfiguration>

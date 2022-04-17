@@ -1,0 +1,37 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.seckill.dao.SeckillDao">
+<!--    <resultMap id="BaseResultMap" type="org.seckill.entity.SecKill">-->
+<!--        <id column="seckill_id" jdbcType="BIGINT" property="seckillId"></id>-->
+<!--        <result column="name" jdbcType="VARCHAR" property="name"></result>-->
+<!--        <result column="number" jdbcType="BIGINT" property="number"></result>-->
+<!--        <result column="start_time" jdbcType="timestamp" property="startTime"></result>-->
+<!--        <result column="end_time" jdbcType="timestamp" property="endTime"></result>-->
+<!--        <result column="create_time" jdbcType="timestamp" property="createTime"></result>-->
+<!--    </resultMap>-->
+    <update id="reduceNumber">
+        update seckill
+        set number = number-1
+        <where>
+            <if test="seckillid!=null">
+              and  seckill_id = #{seckillId}
+            </if>
+            <if test="killTime">
+              and start_time <![CDATA[<=]]> #{killTime}
+              and number > 0
+            </if>
+        </where>
+    </update>
+    <select id="queryById" resultType="org.seckill.entity.SecKill" parameterType="long">
+        select *
+        from seckill
+        where seckill_id=#{seckillId}
+    </select>
+    <select id="queryAll" resultType="org.seckill.entity.SecKill">
+    select *
+    from seckill
+    order by create_time
+    limit #{offset},#{limit}
+    </select>
+</mapper>
